@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  HistoryTVC.h
 //  GroupText
 //
-//  Created by W on 15/12/14.
+//  Created by W on 15/12/18.
 //  Copyright © 2015年 IEC. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface HistoryTVC : UITableViewController
 
 @end
-

@@ -17,6 +17,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    //获取应用程序沙盒的Documents目录
+    NSArray *docPathA=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES);
+    NSString *docPath = [docPathA objectAtIndex:0];
+    //得到Documents目录下完整的文件名
+    NSString *filePath=[docPath stringByAppendingPathComponent:@"HistoryList.plist"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    //判断是否首次运行
+    if(![fileManager fileExistsAtPath:filePath]) {  //如果Documents目录下不存在该文件
+        //获取程序包中相应文件的路径
+        NSString *dataPath = [[NSBundle mainBundle]pathForResource:@"HistoryList" ofType:@"plist"];
+        NSError *error;
+        if([fileManager copyItemAtPath:dataPath toPath:filePath error:&error]) {
+            NSLog(@"用户首次运行且文件拷贝成功！");
+        } else {
+            NSLog(@"%@",error);
+        }
+    }
     return YES;
 }
 

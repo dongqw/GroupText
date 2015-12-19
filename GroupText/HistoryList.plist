@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>time</key>
+		<date>2015-12-18T16:00:00Z</date>
+		<key>status</key>
+		<integer>1</integer>
+		<key>content</key>
+		<string>尊敬的客户，您发送的内容系统无法识别，如需获取更多服务请回复序号：1.话费查询类</string>
+		<key>receiver</key>
+		<array>
+			<string>中国移动服务</string>
+			<string>13438831059</string>
+		</array>
+	</dict>
+	<dict>
+		<key>time</key>
+		<date>2015-12-17T16:00:00Z</date>
+		<key>status</key>
+		<integer>1</integer>
+		<key>content</key>
+		<string>尊敬的客户，您发送的内容系统无法识别，如需获取更多服务请回复序号：1.话费查询类</string>
+		<key>receiver</key>
+		<array>
+			<string>中国移动服务</string>
+			<string>13438831059</string>
+		</array>
+	</dict>
+	<dict>
+		<key>time</key>
+		<date>2015-12-12T14:22:05Z</date>
+		<key>status</key>
+		<integer>1</integer>
+		<key>content</key>
+		<string>圣诞好！！！</string>
+		<key>receiver</key>
+		<array>
+			<string>13800138000</string>
+			<string>13438831059</string>
+		</array>
+	</dict>
+	<dict>
+		<key>time</key>
+		<date>2015-12-11T14:22:05Z</date>
+		<key>status</key>
+		<integer>1</integer>
+		<key>content</key>
+		<string>尊敬的客户，您发送的内容系统无法识别，如需获取更多服务请回复序号：1.话费查询类</string>
+		<key>receiver</key>
+		<array>
+			<string>中国移动服务</string>
+			<string>13438831059</string>
+		</array>
+	</dict>
+</array>
+</plist>
