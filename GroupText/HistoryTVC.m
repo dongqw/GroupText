@@ -12,16 +12,29 @@
 
 @property (strong,nonatomic) NSMutableArray *historyList;
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *editBarButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *addBarButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteBarButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelBarButton;
+
+- (IBAction)editButtonClicked:(UIBarButtonItem *)sender;
+- (IBAction)deleteButtonClicked:(UIBarButtonItem *)sender;
+- (IBAction)cancelButtonClicked:(UIBarButtonItem *)sender;
+
+
 @end
 
 @implementation HistoryTVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    //载入本地群发记录
     NSString *filePath = [self getDocumentsHistoryListPath];
     self.historyList = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
-
+    //放置导航栏按钮
+    self.navigationItem.leftBarButtonItem = self.editBarButton;
+    self.navigationItem.rightBarButtonItem = self.addBarButton;
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -89,11 +102,28 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *indexPaths = [NSArray arrayWithObject:indexPath];
+    // 从数据源中删除所选行对应的值
     [self.historyList removeObjectAtIndex:indexPath.row];
     NSString *filePath=[self getDocumentsHistoryListPath];
     [self.historyList writeToFile:filePath atomically:YES];
+    // 删除对应的行
     [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView reloadData];
+}
+
+//重写左滑删除按钮的标题
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
+
+//选中某行
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self updateDeleteButtonTitle];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self updateDeleteButtonTitle];
 }
 
 /*
@@ -157,6 +187,88 @@
     return days;
 }
 
+#pragma mark - 导航栏按钮方法
+
+// 点击编辑按钮
+- (IBAction)editButtonClicked:(UIBarButtonItem *)sender {
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;// 进入可多选删除状态
+    [self.tableView setEditing:YES animated:YES];// 将table设置为可编辑
+    [self updateBarButtons];  //更改导航栏的导航按钮
+}
+
+// 点击删除按钮
+- (IBAction)deleteButtonClicked:(UIBarButtonItem *)sender {
+    // 选中的行
+    NSArray *selectedRows = [self.tableView indexPathsForSelectedRows];
+    // 删除选中的行
+    if (selectedRows.count > 0)
+    {
+        // 将所选的行的索引值放在一个集合中进行批量删除
+        NSMutableIndexSet *indicesOfItemsToDelete = [NSMutableIndexSet new];
+        
+        for (NSIndexPath *selectionIndex in selectedRows)
+        {
+            [indicesOfItemsToDelete addIndex:selectionIndex.row];
+        }
+        // 从数据源中删除所选行对应的值
+        [self.historyList removeObjectsAtIndexes:indicesOfItemsToDelete];
+        NSString *filePath=[self getDocumentsHistoryListPath];
+        [self.historyList writeToFile:filePath atomically:YES];
+        
+        // 删除所选的行
+        [self.tableView deleteRowsAtIndexPaths:selectedRows withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+    [self.tableView setEditing:NO animated:YES];
+    
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
+    [self updateBarButtons];
+}
+
+// 点击取消按钮
+- (IBAction)cancelButtonClicked:(UIBarButtonItem *)sender {
+    
+    [self.tableView setEditing:NO animated:YES];
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    [self updateBarButtons];
+}
+
+// 更新导航栏按钮
+-(void) updateBarButtons
+{
+    // 如果是允许多选的状态，即进入批量删除模式
+    if (self.tableView.allowsSelectionDuringEditing == YES) {
+        //更新删除按钮
+        [self updateDeleteButtonTitle];
+        // 导航栏左边按钮设置为空
+        self.navigationItem.leftBarButtonItems = nil;
+        // 将左边按钮设置为'删除'按钮
+        self.navigationItem.leftBarButtonItem = self.deleteBarButton;
+        // 导航栏右键设置为'取消'按钮
+        self.navigationItem.rightBarButtonItem = self.cancelBarButton;
+        
+    } else { // 如果不是多选状态，将导航栏设置为初始状态的样式
+        self.navigationItem.leftBarButtonItem = self.editBarButton;
+        self.navigationItem.rightBarButtonItem = self.addBarButton;
+    }
+}
+
+// 更新删除按钮的标题
+-(void)updateDeleteButtonTitle
+{
+    NSArray *selectedRows = [self.tableView indexPathsForSelectedRows];//得到选中行
+    
+    BOOL allItemsAreSelected = selectedRows.count == self.historyList.count;// 是否全选
+    
+    if (allItemsAreSelected) { // 如果全选，则删除键为删除全部
+        self.deleteBarButton.title = @"删除全部";
+    } else { // 否则 删除键为删除（选中行数量）
+        self.deleteBarButton.title = [NSString stringWithFormat:@"删除 (%lu)", (unsigned long)selectedRows.count];
+    }
+    
+}
+
 /*
 #pragma mark - Navigation
 
@@ -166,7 +278,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-
 
 @end

@@ -1,29 +1,29 @@
 //
-//  NewMessageTVC.m
+//  DefineNameTVC.m
 //  GroupText
 //
-//  Created by W on 15/12/19.
+//  Created by 7937 on 15/12/20.
 //  Copyright © 2015年 IEC. All rights reserved.
 //
 
-#import "NewMessageTVC.h"
+#import "DefineNameTVC.h"
 #import "TextViewCell.h"
 
-@interface NewMessageTVC ()
+@interface DefineNameTVC ()
 
-- (IBAction)cancelButtonClicked:(UIBarButtonItem *)sender;
+@property(strong,nonatomic)NSMutableArray *contactList;
 
 @end
 
-@implementation NewMessageTVC
+@implementation DefineNameTVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //  支持自适应 cell
+    self.contactList=[[NSMutableArray alloc]init];
     self.tableView.estimatedRowHeight = 100;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -42,17 +42,26 @@
     return 2;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        TextViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"receiver cell" forIndexPath:indexPath];
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row==0) {
+        TextViewCell *cell=[tableView dequeueReusableCellWithIdentifier:@"choose cell"];
         return cell;
-    } else {
-        TextViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"content cell" forIndexPath:indexPath];
-        return cell;
+    }else{
+        TextViewCell *cell1=[tableView dequeueReusableCellWithIdentifier:@"list cell"];
+        return cell1;
     }
+    return nil;
 }
 
+/*
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    
+    // Configure the cell...
+    
+    return cell;
+}
+*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -87,15 +96,6 @@
     return YES;
 }
 */
-
-#pragma mark - 自定义方法
-
-// 点击取消按钮
-- (IBAction)cancelButtonClicked:(UIBarButtonItem *)sender {
-    [self dismissViewControllerAnimated:YES completion:^{
-
-    }];
-}
 
 /*
 #pragma mark - Navigation

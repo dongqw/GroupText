@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		162DE4EA1C258B800069F033 /* TextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 162DE4E91C258B800069F033 /* TextViewCell.m */; };
 		162DE4ED1C258E610069F033 /* NewMessageTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 162DE4EC1C258E610069F033 /* NewMessageTVC.m */; };
+		162DE4EF1C26E0CE0069F033 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 162DE4EE1C26E0CE0069F033 /* Contacts.framework */; };
+		162DE4F21C26E0F80069F033 /* ContactsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 162DE4F11C26E0F80069F033 /* ContactsTVC.m */; };
+		162DE4F51C2714ED0069F033 /* DefineNameTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 162DE4F41C2714ED0069F033 /* DefineNameTVC.m */; };
 		1679A40E1C244242005454BF /* HistoryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1679A40D1C244242005454BF /* HistoryTVC.m */; };
 		1679A44F1C244D55005454BF /* HistoryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1679A44E1C244D55005454BF /* HistoryList.plist */; };
 		169E0B4D1C1E92C7008C7DA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 169E0B4C1C1E92C7008C7DA1 /* main.m */; };
@@ -43,6 +46,11 @@
 		162DE4E91C258B800069F033 /* TextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewCell.m; sourceTree = "<group>"; };
 		162DE4EB1C258E610069F033 /* NewMessageTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageTVC.h; sourceTree = "<group>"; };
 		162DE4EC1C258E610069F033 /* NewMessageTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageTVC.m; sourceTree = "<group>"; };
+		162DE4EE1C26E0CE0069F033 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		162DE4F01C26E0F80069F033 /* ContactsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsTVC.h; sourceTree = "<group>"; };
+		162DE4F11C26E0F80069F033 /* ContactsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsTVC.m; sourceTree = "<group>"; };
+		162DE4F31C2714ED0069F033 /* DefineNameTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineNameTVC.h; sourceTree = "<group>"; };
+		162DE4F41C2714ED0069F033 /* DefineNameTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefineNameTVC.m; sourceTree = "<group>"; };
 		1679A40C1C244242005454BF /* HistoryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTVC.h; sourceTree = "<group>"; };
 		1679A40D1C244242005454BF /* HistoryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTVC.m; sourceTree = "<group>"; };
 		1679A44E1C244D55005454BF /* HistoryList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HistoryList.plist; sourceTree = "<group>"; };
@@ -70,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				162DE4EF1C26E0CE0069F033 /* Contacts.framework in Frameworks */,
 				99F0965F9DB078BF87669926 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,8 +139,12 @@
 				1679A40C1C244242005454BF /* HistoryTVC.h */,
 				1679A40D1C244242005454BF /* HistoryTVC.m */,
 				169E0B541C1E92C7008C7DA1 /* Main.storyboard */,
+				162DE4F01C26E0F80069F033 /* ContactsTVC.h */,
+				162DE4F11C26E0F80069F033 /* ContactsTVC.m */,
 				162DE4EB1C258E610069F033 /* NewMessageTVC.h */,
 				162DE4EC1C258E610069F033 /* NewMessageTVC.m */,
+				162DE4F31C2714ED0069F033 /* DefineNameTVC.h */,
+				162DE4F41C2714ED0069F033 /* DefineNameTVC.m */,
 				162DE4E81C258B800069F033 /* TextViewCell.h */,
 				162DE4E91C258B800069F033 /* TextViewCell.m */,
 				1679A44E1C244D55005454BF /* HistoryList.plist */,
@@ -172,6 +185,7 @@
 		1C1F856C7F7A020D41B022E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				162DE4EE1C26E0CE0069F033 /* Contacts.framework */,
 				8405341065D6280DF1F7CFCB /* libPods.a */,
 			);
 			name = Frameworks;
@@ -359,8 +373,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				162DE4F21C26E0F80069F033 /* ContactsTVC.m in Sources */,
 				162DE4ED1C258E610069F033 /* NewMessageTVC.m in Sources */,
 				169E0B501C1E92C7008C7DA1 /* AppDelegate.m in Sources */,
+				162DE4F51C2714ED0069F033 /* DefineNameTVC.m in Sources */,
 				162DE4EA1C258B800069F033 /* TextViewCell.m in Sources */,
 				1679A40E1C244242005454BF /* HistoryTVC.m in Sources */,
 				169E0B4D1C1E92C7008C7DA1 /* main.m in Sources */,
